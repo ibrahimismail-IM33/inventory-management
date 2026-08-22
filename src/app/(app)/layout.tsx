@@ -5,6 +5,7 @@ import { signOut } from "@/lib/actions/auth";
 const NAV = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/products", label: "Products" },
+  { href: "/import", label: "Import" },
   { href: "/suppliers", label: "Suppliers" },
   { href: "/receive", label: "Receive" },
   { href: "/expiry", label: "Expiry" },
