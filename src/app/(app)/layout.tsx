@@ -10,6 +10,7 @@ const NAV = [
   { href: "/receive", label: "Receive" },
   { href: "/expiry", label: "Expiry" },
   { href: "/returns", label: "Returns" },
+  { href: "/settings", label: "Settings" },
 ];
 
 export default async function AppLayout({

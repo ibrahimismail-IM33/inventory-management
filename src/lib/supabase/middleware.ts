@@ -3,7 +3,9 @@ import { NextResponse, type NextRequest } from "next/server";
 
 type CookieToSet = { name: string; value: string; options: CookieOptions };
 
-const PUBLIC_PATHS = ["/login", "/auth"];
+// Paths that don't require an authenticated user. API routes handle their own
+// auth (e.g. the cron route checks CRON_SECRET), so they must not be redirected.
+const PUBLIC_PATHS = ["/login", "/auth", "/api"];
 
 /** Refresh the Supabase session and guard authenticated routes. */
 export async function updateSession(request: NextRequest) {
