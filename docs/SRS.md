@@ -1,10 +1,10 @@
-# Software Requirements Specification (SRS)
+# WAQT — Software Requirements Specification (SRS)
 ### Expiry-Date Inventory SaaS — v1
 
 | | |
 |---|---|
 | **Document** | Software Requirements Specification (SRS) |
-| **Product** | Expiry-date inventory management SaaS |
+| **Product** | **WAQT** — expiry-date inventory management SaaS |
 | **Version** | 0.1 (draft for review) |
 | **Date** | 2026-08-22 |
 | **Companion** | `docs/PRD.md` |
@@ -18,12 +18,12 @@
 This SRS specifies the architecture, data model, functional and non-functional requirements for v1 of the expiry-date inventory SaaS. It is the engineering counterpart to the PRD.
 
 ### 1.2 Scope
-v1 delivers, for FMCG supermarkets: multi-tenant accounts, master-data import, batch-level expiry tracking, expiry alerts, an expired-return-to-supplier (RTV) workflow with credit tracking, FEFO outflow, and an ROI/waste report. Out-of-scope items are listed in §9.
+v1 delivers, for FMCG supermarkets: multi-tenant accounts, **multi-store** support (a company can operate several stores), master-data import, batch-level expiry tracking, expiry alerts, a **Supplier Return** workflow for expired stock with credit tracking, FEFO outflow, and an ROI/waste report. Out-of-scope items are listed in §9.
 
 ### 1.3 Definitions
 - **Batch (lot):** a quantity of a product received together sharing one expiry date.
 - **FEFO:** First-Expired-First-Out — allocate outflow from the earliest-expiring batch first.
-- **RTV:** Return-to-Vendor — returning expired/damaged stock to the supplier for credit.
+- **Supplier Return (RTV):** returning expired/damaged stock to the supplier for credit. "Supplier Return" is the user-facing term.
 - **RLS:** Row-Level Security — Postgres feature enforcing per-tenant data isolation.
 - **Tenant:** one company (customer) and all its data.
 
@@ -82,6 +82,7 @@ Requirements are testable; each ports behavior from the reference `src/lib/inven
 - FR-1.2 On first login a company + default store are created; the user becomes `admin`.
 - FR-1.3 Admins can invite members and assign role (`admin`/`staff`).
 - FR-1.4 All data access is scoped to the caller's company via RLS.
+- FR-1.5 **Multi-store:** admins can create/manage multiple stores in a company; stock, expiry, and Supplier Returns are tracked per store, and lists/reports can be filtered by store.
 
 ### FR-2 Master data & import
 - FR-2.1 Users can create/edit/deactivate **products** and **suppliers**.
@@ -102,9 +103,9 @@ Requirements are testable; each ports behavior from the reference `src/lib/inven
 - FR-6.1 A daily `pg_cron` job invokes an Edge Function that, per company, finds expiring-soon/expired batches and sends an **email digest** to admins + writes **in-app notifications**.
 - FR-6.2 Digest frequency (daily/weekly) is a company setting.
 
-### FR-7 Expired return-to-supplier (RTV) — core (port: factory/vendor returns)
-- FR-7.1 Users create a **supplier return** from selected expired/near-expired batches (grouped by supplier), producing `supplier_returns` + `supplier_return_lines` and `return` movements that reduce stock.
-- FR-7.2 Users update return **status** (`draft`→`submitted`→`shipped`→`credited`/`rejected`) and record **credit_amount**.
+### FR-7 Supplier Return (expired stock) — core (port: factory/vendor returns)
+- FR-7.1 Users create a **Supplier Return** from selected expired/near-expired batches (grouped by supplier), producing `supplier_returns` + `supplier_return_lines` and `return` movements that reduce stock.
+- FR-7.2 Users update the Supplier Return **status** (`draft`→`submitted`→`shipped`→`credited`/`rejected`) and record **credit_amount**.
 - FR-7.3 A batch flagged `returnable=false` (or product non-returnable) is routed to **scrap** instead (FR-8).
 
 ### FR-8 Scrap / write-off (port: `scrapLot`)

@@ -1,10 +1,10 @@
-# Product Requirements Document (PRD)
+# WAQT — Product Requirements Document (PRD)
 ### Expiry-Date Inventory SaaS — v1
 
 | | |
 |---|---|
 | **Document** | Product Requirements Document (PRD) |
-| **Product** | Expiry-date inventory management SaaS (working name: TBD) |
+| **Product** | **WAQT** — expiry-date inventory management SaaS |
 | **Version** | 0.1 (draft for review) |
 | **Date** | 2026-08-22 |
 | **Owner** | Product Manager |
@@ -86,9 +86,9 @@ Our product fills exactly that gap. It **complements** (does not replace) the re
 ### 6.5 Alerts
 - As a manager, I receive **email + in-app alerts** (daily/weekly digest) of stock expiring soon and already expired, so nothing slips through.
 
-### 6.6 Expired return-to-supplier (RTV) — the core workflow
-- As a user, I can select expired (or near-expired) batches and **create a return to the supplier**, so I can claim credit.
-- As a user, I can track the return's **status** (draft → submitted → shipped → credited/rejected) and the **credit amount recovered**.
+### 6.6 Supplier Return (expired stock) — the core workflow
+- As a user, I can select expired (or near-expired) batches and **create a Supplier Return**, so I can claim credit.
+- As a user, I can track the Supplier Return's **status** (draft → submitted → shipped → credited/rejected) and the **credit amount recovered**.
 - As a user, I can record **scrap/write-off** for stock that cannot be returned.
 
 ### 6.7 Outflow & FEFO
@@ -134,11 +134,15 @@ Our product fills exactly that gap. It **complements** (does not replace) the re
 | R5 | Assumption: FMCG suppliers accept returns for expired goods | Validate return terms during discovery per supplier |
 | R6 | Single flat price ignores store size | Move to tiered pricing after first customers |
 
-## 11. Open questions
-1. Product/brand name.
-2. Exact supplier-return terms/documents expected by Malaysian FMCG suppliers (affects RTV fields).
-3. Whether v1 needs multi-store on day one, or single-store is enough for the first pilot.
-4. Baseline waste numbers from the first pilot supermarket (to be captured in discovery).
+## 11. Decisions & open questions
+**Decided:**
+- Product name: **WAQT**.
+- v1 is **multi-store** (a company can have several stores; stock, expiry, and Supplier Returns are per store).
+- The expired-stock return feature is named **"Supplier Return"** (user-facing term).
+
+**Still open:**
+1. Exact document format/fields Malaysian FMCG suppliers expect on a Supplier Return (to confirm during discovery).
+2. Baseline waste numbers from the first pilot supermarket (to be captured in discovery — see `docs/PILOT_SCRIPT.md`).
 
 ---
 *This PRD defines the "what" and "why". The companion SRS (`docs/SRS.md`) defines the "how".*
