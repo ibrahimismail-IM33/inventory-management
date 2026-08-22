@@ -3,6 +3,7 @@ import { getWorkspace } from "@/lib/workspace";
 import { daysUntil, expiryBucket, type ExpiryBucket } from "@/lib/inventory";
 import { scrapBatch } from "@/lib/actions/movements";
 import { createSupplierReturn } from "@/lib/actions/returns";
+import { SubmitButton } from "@/components/SubmitButton";
 
 const BUCKET_META: Record<ExpiryBucket, { title: string; tone: string }> = {
   expired: { title: "Expired", tone: "text-red-600" },
@@ -102,16 +103,16 @@ export default async function ExpiryPage() {
                                     <option key={s.id} value={s.id}>{s.name}</option>
                                   ))}
                                 </select>
-                                <button className="rounded-md bg-teal-700 px-2 py-1 text-xs font-medium text-white hover:bg-teal-800">
+                                <SubmitButton pendingText="…" className="rounded-md bg-teal-700 px-2 py-1 text-xs font-medium text-white hover:bg-teal-800">
                                   Return
-                                </button>
+                                </SubmitButton>
                               </form>
                             )}
                             <form action={scrapBatch}>
                               <input type="hidden" name="batch_id" value={r.id} />
-                              <button className="rounded-md border border-black/15 px-2 py-1 text-xs hover:bg-black/5">
+                              <SubmitButton pendingText="…" className="rounded-md border border-black/15 px-2 py-1 text-xs hover:bg-black/5">
                                 Scrap
-                              </button>
+                              </SubmitButton>
                             </form>
                           </div>
                         </td>

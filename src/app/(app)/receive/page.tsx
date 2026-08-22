@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getWorkspace } from "@/lib/workspace";
 import { receiveStock } from "@/lib/actions/receive";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function ReceivePage() {
   const { company, stores } = await getWorkspace();
@@ -58,9 +59,9 @@ export default async function ReceivePage() {
             Quantity
             <input name="qty" type="number" min={1} required className="mt-1 w-full rounded-md border border-black/15 bg-transparent px-3 py-2" />
           </label>
-          <button className="mt-2 rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">
+          <SubmitButton pendingText="Receiving…" className="mt-2 rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">
             Receive into stock
-          </button>
+          </SubmitButton>
         </form>
       )}
     </div>

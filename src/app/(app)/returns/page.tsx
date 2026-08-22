@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getWorkspace } from "@/lib/workspace";
 import { updateReturnStatus } from "@/lib/actions/returns";
 import { formatMoney } from "@/lib/inventory";
+import { SubmitButton } from "@/components/SubmitButton";
 
 const STATUSES = ["draft", "submitted", "shipped", "credited", "rejected"] as const;
 
@@ -84,7 +85,7 @@ export default async function ReturnsPage() {
                             ))}
                           </select>
                           <input name="credit_amount" type="number" step="0.01" placeholder="Credit" className="w-24 rounded-md border border-black/15 bg-transparent px-2 py-1 text-xs" />
-                          <button className="rounded-md bg-teal-700 px-2 py-1 text-xs font-medium text-white hover:bg-teal-800">Save</button>
+                          <SubmitButton pendingText="…" className="rounded-md bg-teal-700 px-2 py-1 text-xs font-medium text-white hover:bg-teal-800">Save</SubmitButton>
                         </form>
                       </td>
                     </tr>

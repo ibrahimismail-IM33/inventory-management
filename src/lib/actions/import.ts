@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { getWorkspace } from "@/lib/workspace";
+import { getActor } from "@/lib/workspace";
 import { parseCsvTable, pick } from "@/lib/csv";
 
 export interface ImportResult {
@@ -41,7 +41,7 @@ export async function importProducts(
   _prev: ImportResult,
   formData: FormData,
 ): Promise<ImportResult> {
-  const { company } = await getWorkspace();
+  const { company } = await getActor();
   const supabase = await createClient();
 
   // Read from an uploaded file, or fall back to pasted text.

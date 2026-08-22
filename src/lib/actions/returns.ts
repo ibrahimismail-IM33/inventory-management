@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { getWorkspace } from "@/lib/workspace";
+import { getActor } from "@/lib/workspace";
 import type { ReturnStatus } from "@/lib/types";
 
 /**
@@ -11,7 +11,7 @@ import type { ReturnStatus } from "@/lib/types";
  * across stores. (v1 supports one batch per return; multi-line comes later.)
  */
 export async function createSupplierReturn(formData: FormData) {
-  const { company, userId } = await getWorkspace();
+  const { company, userId } = await getActor();
   const supabase = await createClient();
 
   const batchId = String(formData.get("batch_id") ?? "");
@@ -81,7 +81,7 @@ export async function createSupplierReturn(formData: FormData) {
 
 /** Update a Supplier Return's status and (when credited) the recovered amount. */
 export async function updateReturnStatus(formData: FormData) {
-  await getWorkspace();
+  await getActor();
   const supabase = await createClient();
   const id = String(formData.get("id") ?? "");
   const status = String(formData.get("status") ?? "") as ReturnStatus;

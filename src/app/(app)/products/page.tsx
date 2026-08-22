@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getWorkspace } from "@/lib/workspace";
 import { createProduct } from "@/lib/actions/catalog";
 import { formatMoney } from "@/lib/inventory";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function ProductsPage() {
   const { company } = await getWorkspace();
@@ -79,7 +80,7 @@ export default async function ProductsPage() {
           <label className="flex items-center gap-2">
             <input type="checkbox" name="returnable" defaultChecked /> Returnable to supplier
           </label>
-          <button className="rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">Add product</button>
+          <SubmitButton pendingText="Adding…" className="rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">Add product</SubmitButton>
         </form>
       </section>
     </div>

@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { getWorkspace } from "@/lib/workspace";
+import { getActor } from "@/lib/workspace";
 import { runExpiryAlerts } from "@/lib/alerts-run";
 
 function parseRecipients(raw: string): string[] {
@@ -18,7 +18,7 @@ function parseRecipients(raw: string): string[] {
 }
 
 export async function updateAlertSettings(formData: FormData) {
-  const { company, role } = await getWorkspace();
+  const { company, role } = await getActor();
   if (role !== "admin") redirect("/settings?saved=denied");
   const supabase = await createClient();
 
@@ -43,7 +43,7 @@ export async function updateAlertSettings(formData: FormData) {
 }
 
 export async function sendTestAlert() {
-  const { company } = await getWorkspace();
+  const { company } = await getActor();
   let msg: string;
   try {
     const outcomes = await runExpiryAlerts({ onlyCompanyId: company.id, force: true });

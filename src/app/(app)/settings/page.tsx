@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { getWorkspace } from "@/lib/workspace";
 import { updateAlertSettings, sendTestAlert } from "@/lib/actions/settings";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function SettingsPage({
   searchParams,
@@ -110,18 +111,18 @@ export default async function SettingsPage({
           />
         </label>
 
-        <button className="w-fit rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">
+        <SubmitButton pendingText="Saving…" className="w-fit rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">
           Save settings
-        </button>
+        </SubmitButton>
       </form>
 
       <form action={sendTestAlert} className="mt-6 border-t border-black/10 pt-4">
         <p className="text-sm opacity-70">
           Send yourself a digest right now to check the email works (ignores schedule).
         </p>
-        <button className="mt-2 rounded-md border border-black/15 px-4 py-2 text-sm font-medium hover:bg-black/5">
+        <SubmitButton pendingText="Sending…" className="mt-2 rounded-md border border-black/15 px-4 py-2 text-sm font-medium hover:bg-black/5">
           Send test alert now
-        </button>
+        </SubmitButton>
       </form>
 
       <p className="mt-6 text-xs opacity-50">

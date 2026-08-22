@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { getWorkspace } from "@/lib/workspace";
 import { createSupplier } from "@/lib/actions/catalog";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function SuppliersPage() {
   const { company } = await getWorkspace();
@@ -45,7 +46,7 @@ export default async function SuppliersPage() {
           <input name="name" required placeholder="Supplier name" className="rounded-md border border-black/15 bg-transparent px-3 py-2" />
           <input name="contact" placeholder="Contact (phone/email)" className="rounded-md border border-black/15 bg-transparent px-3 py-2" />
           <textarea name="return_terms" placeholder="Return terms (optional)" className="rounded-md border border-black/15 bg-transparent px-3 py-2" />
-          <button className="rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">Add supplier</button>
+          <SubmitButton pendingText="Adding…" className="rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">Add supplier</SubmitButton>
         </form>
       </section>
     </div>

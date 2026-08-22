@@ -1,4 +1,5 @@
 import { createCompany } from "@/lib/actions/company";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function OnboardingPage({
   searchParams,
@@ -30,9 +31,9 @@ export default async function OnboardingPage({
             placeholder="e.g. Kedai Runcit Maju"
           />
         </label>
-        <button className="mt-2 rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">
+        <SubmitButton pendingText="Creating…" className="mt-2 rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800">
           Create workspace
-        </button>
+        </SubmitButton>
       </form>
     </main>
   );

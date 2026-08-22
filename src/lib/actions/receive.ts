@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { getWorkspace } from "@/lib/workspace";
+import { getActor } from "@/lib/workspace";
 import { statusFromDate } from "@/lib/inventory";
 
 /**
@@ -10,7 +10,7 @@ import { statusFromDate } from "@/lib/inventory";
  * and log a `receive` movement.
  */
 export async function receiveStock(formData: FormData) {
-  const { company, userId } = await getWorkspace();
+  const { company, userId } = await getActor();
   const supabase = await createClient();
 
   const productId = String(formData.get("product_id") ?? "");

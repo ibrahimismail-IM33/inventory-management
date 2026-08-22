@@ -2,10 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { getWorkspace } from "@/lib/workspace";
+import { getActor } from "@/lib/workspace";
 
 export async function createSupplier(formData: FormData) {
-  const { company } = await getWorkspace();
+  const { company } = await getActor();
   const supabase = await createClient();
   const name = String(formData.get("name") ?? "").trim();
   if (!name) return;
@@ -19,7 +19,7 @@ export async function createSupplier(formData: FormData) {
 }
 
 export async function createProduct(formData: FormData) {
-  const { company } = await getWorkspace();
+  const { company } = await getActor();
   const supabase = await createClient();
   const sku = String(formData.get("sku") ?? "").trim();
   const name = String(formData.get("name") ?? "").trim();

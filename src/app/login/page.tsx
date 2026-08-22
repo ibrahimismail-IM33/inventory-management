@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signIn, signUp } from "@/lib/actions/auth";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function LoginPage({
   searchParams,
@@ -22,7 +23,7 @@ export default async function LoginPage({
         <p className="rounded-md bg-red-500/10 px-3 py-2 text-sm text-red-600">{error}</p>
       )}
 
-      <form className="flex flex-col gap-3">
+      <form action={isSignup ? signUp : signIn} className="flex flex-col gap-3">
         <label className="text-sm font-medium">
           Email
           <input
@@ -43,12 +44,12 @@ export default async function LoginPage({
           />
         </label>
 
-        <button
-          formAction={isSignup ? signUp : signIn}
+        <SubmitButton
+          pendingText={isSignup ? "Creating account…" : "Signing in…"}
           className="mt-2 rounded-md bg-teal-700 px-4 py-2 font-medium text-white hover:bg-teal-800"
         >
           {isSignup ? "Create account" : "Sign in"}
-        </button>
+        </SubmitButton>
       </form>
 
       <p className="text-sm opacity-70">
